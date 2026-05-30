@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./icon.svg" width="120" alt="PopForge icon" />
+</p>
+
 # PopForge Site
 
 Public landing page for **PopForge**, a cross-platform **ISO to PBP converter for PSP**.
