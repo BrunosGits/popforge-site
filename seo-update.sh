@@ -1,3 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Starting PopForge SEO update..."
+
+if [ ! -f "index.html" ]; then
+  echo "Error: index.html not found. Are you inside ~/popforge-site?"
+  exit 1
+fi
+
+if [ ! -f "styles.css" ]; then
+  echo "Error: styles.css not found. Are you inside ~/popforge-site?"
+  exit 1
+fi
+
+BACKUP_DIR="backups/seo-$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$BACKUP_DIR"
+
+cp index.html "$BACKUP_DIR/index.html.bak"
+cp styles.css "$BACKUP_DIR/styles.css.bak"
+
+if [ -f "README.md" ]; then
+  cp README.md "$BACKUP_DIR/README.md.bak"
+fi
+
+if [ -f "robots.txt" ]; then
+  cp robots.txt "$BACKUP_DIR/robots.txt.bak"
+fi
+
+if [ -f "sitemap.xml" ]; then
+  cp sitemap.xml "$BACKUP_DIR/sitemap.xml.bak"
+fi
+
+cat > index.html <<'HTML'
 <!doctype html>
 <html lang="en">
   <head>
@@ -333,3 +367,136 @@
     </main>
   </body>
 </html>
+HTML
+
+cat > robots.txt <<'TXT'
+User-agent: *
+Allow: /
+
+Sitemap: https://brunosgits.github.io/popforge-site/sitemap.xml
+TXT
+
+cat > sitemap.xml <<'XML'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://brunosgits.github.io/popforge-site/</loc>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+XML
+
+cat > README.md <<'MD'
+# PopForge Site
+
+Public landing page for **PopForge**, a cross-platform **ISO to PBP converter for PSP**.
+
+Live site:
+
+https://brunosgits.github.io/popforge-site/
+
+## What is PopForge?
+
+PopForge is a desktop GUI for converting PlayStation 1, PS1, and PSX disc images into PSP-compatible `EBOOT.PBP` files. It is designed for users searching for a simple way to convert ISO to PBP, BIN/CUE to PBP, or PSX disc images to PSP EBOOT format.
+
+## Target keywords
+
+- ISO to PBP converter
+- convert ISO to PBP
+- PSP EBOOT.PBP converter
+- PSX to PBP
+- PS1 to PBP
+- BIN CUE to PBP
+- PS Vita Adrenaline EBOOT
+- popstationr GUI
+- PSXPackager alternative
+
+## Repositories
+
+- Public site: https://github.com/BrunosGits/popforge-site
+- App repo: private during development
+MD
+
+if ! grep -q "POPForge SEO additions" styles.css; then
+cat >> styles.css <<'CSS'
+
+/* POPForge SEO additions */
+code {
+  padding: 0.12rem 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(26, 26, 26, 0.72);
+  color: var(--accent-2);
+}
+
+.seo-intro strong {
+  color: var(--text);
+}
+
+.seo-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.seo-table th,
+.seo-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.seo-table th {
+  color: var(--text);
+  background: rgba(26, 26, 26, 0.72);
+}
+
+.seo-table td {
+  color: var(--muted);
+}
+
+.seo-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.faq article {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq article:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.faq h3 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.faq p {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .seo-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+CSS
+fi
+
+echo ""
+echo "SEO update complete."
+echo "Backups saved in: $BACKUP_DIR"
+echo ""
+echo "Quick checks:"
+grep -n "<title>" index.html || true
+grep -n "ISO to PBP" index.html | head -5 || true
+echo ""
+echo "Next: review the site locally, then commit and push."

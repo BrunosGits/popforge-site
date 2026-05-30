@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PopForge</title>
+
+    <meta
+      name="description"
+      content="PopForge is a cross-platform GUI for converting PlayStation 1 disc images to EBOOT.PBP files for PSP and PS Vita."
+    />
+
+    <meta property="og:title" content="PopForge" />
+    <meta property="og:description" content="PSX to EBOOT, forged for every platform." />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-icon">
+          <img src="./icon.svg" alt="PopForge icon" />
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">PSX · PSP · Vita</p>
+          <h1>PopForge</h1>
+          <p class="tagline">PSX to EBOOT, forged for every platform.</p>
+
+          <p class="description">
+            A simple cross-platform desktop app for converting PlayStation 1
+            disc images to <strong>EBOOT.PBP</strong> files playable on PSP and
+            PS Vita through Adrenaline.
+          </p>
+
+          <div class="actions">
+            <a class="button primary disabled" href="#downloads" aria-disabled="true">
+              Coming Soon
+            </a>
+
+            <a class="button" href="#features">
+              View Features
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="features">
+        <h2>Features</h2>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>ISO / BIN+CUE to EBOOT</h3>
+            <p>Convert PS1 disc images into PSP-compatible EBOOT.PBP files.</p>
+          </article>
+
+          <article class="feature">
+            <h3>Auto Game ID Detection</h3>
+            <p>Detects PlayStation game IDs automatically when possible.</p>
+          </article>
+
+          <article class="feature">
+            <h3>Batch Queue</h3>
+            <p>Queue multiple games and monitor progress for each conversion.</p>
+          </article>
+
+          <article class="feature">
+            <h3>PBP Extraction</h3>
+            <p>Extract existing EBOOT.PBP files back into disc image format.</p>
+          </article>
+
+          <article class="feature">
+            <h3>Filename Templates</h3>
+            <p>Format output names using tokens like %GAMEID%, %TITLE%, and %REGION%.</p>
+          </article>
+
+          <article class="feature">
+            <h3>Cross Platform</h3>
+            <p>Built for macOS, Windows, and Linux using Tauri and Svelte.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="downloads">
+        <h2>Downloads</h2>
+
+        <div class="downloads">
+          <span>macOS Apple Silicon</span>
+          <span>Windows</span>
+          <span>Linux</span>
+        </div>
+
+        <p class="note">
+          Downloads will be available once the first public release is ready.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Built on retro foundations</h2>
+
+        <p>
+          PopForge wraps
+          <a href="https://github.com/pseiler/popstationr">popstationr</a>,
+          a lightweight command-line tool for creating PSP-compatible PS1 EBOOT files.
+        </p>
+
+        <p>
+          The project is also inspired by
+          <a href="https://github.com/RupertAvery/PSXPackager">PSXPackager</a>,
+          especially its batch processing and packaging workflow.
+        </p>
+      </section>
+
+      <footer class="footer">
+        <p>
+          PopForge is currently in development. Public release coming soon.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

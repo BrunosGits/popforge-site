@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brunosgits.github.io/popforge-site/sitemap.xml
